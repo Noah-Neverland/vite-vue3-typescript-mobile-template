@@ -1,0 +1,20 @@
+name: SyncToGitee
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee.
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 来源仓库
+          source-repo: 'git@github.com:Noah-Neverland/vite-vue3-typescript-mobile-template.git' #此处改成需要同步到gitee的仓库地址
+          # 目标仓库
+          destination-repo: 'git@gitee.com:hanshuaishuai/vite-vue3-typescript-mobile-template.git' #此处改成gitee被同步的仓库地址
